@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\MaritalStatusEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,16 +18,15 @@ return new class extends Migration
             $table->string('gender');
             $table->string('email')->unique();
             $table->string('password');
-            $table->integer('phone');
+            $table->string('phone');
             $table->date('birthday');
             $table->string('address');
-            $table->integer('address_number');
-            $table->string('complement');
-            $table->string('baptized');
-            $table->enum('marital_status', ['Single', 'Married', 'Divorced', 'Widower', 'Separated'])->default('Single');
-            $table->timestamp('created_at');
-            $table->timestamp('updated_at');
-            $table->timestamp('deleted_at');
+            $table->string('address_number');
+            $table->string('complement')->nullable();
+            $table->date('baptized')->nullable();
+            $table->enum('marital_status', array_column(MaritalStatusEnum::cases(), 'value'))->default('Single');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
