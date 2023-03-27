@@ -1,6 +1,7 @@
 <?php
 
-use App\Enums\MaritalStatusEnum;
+use App\Enums\MaritalStatus;
+use App\Enums\Gender;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,7 +16,7 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('gender');
+            $table->enum('gender', array_column(Gender::cases(), 'value'));
             $table->string('email')->unique();
             $table->string('password');
             $table->string('phone');
@@ -24,7 +25,7 @@ return new class extends Migration
             $table->string('address_number');
             $table->string('complement')->nullable();
             $table->date('baptized')->nullable();
-            $table->enum('marital_status', array_column(MaritalStatusEnum::cases(), 'value'))->default('Single');
+            $table->enum('marital_status', array_column(MaritalStatus::cases(), 'value'))->default('Single');
             $table->timestamps();
             $table->softDeletes();
         });
