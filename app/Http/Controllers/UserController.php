@@ -34,8 +34,12 @@ class UserController extends Controller
         $data = $request->all();
         $data['password'] = bcrypt($request->password);
 
-        User::create($data);
+        dd(User::create($data));
 
-        return redirect()->route('users.index');
+
+
+        // return redirect()->route('users.index');
+
+
     }
 }
