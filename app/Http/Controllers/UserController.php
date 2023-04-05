@@ -36,10 +36,14 @@ class UserController extends Controller
 
         dd(User::create($data));
 
-
-
         return redirect()->route('users.index');
+    }
 
+    public function edit($id)
+    {
+        if (!$user = User::find($id))
+            return redirect()->route('users.index');
 
+        return view('users.edit', compact('user'));
     }
 }
