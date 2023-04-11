@@ -14,7 +14,8 @@
     </ul>
 @endif
 
-<form action="#" method="POST">
+<form action="{{ route('users.update', $user->id)}}" method="POST">
+    @method('PUT')
     @csrf
     <input type="text" name="name" placeholder="Nome" value="{{ $user->name }}">
     <input type="email" name="email" placeholder="E-mail" value="{{ $user->email }}">
