@@ -10,14 +10,15 @@
     <input type="text" name="complement" placeholder="Complement" value="{{ $user->complement ?? old('complement') }}">
     <label for="baptized">Baptized</label>
     <input type="date" name="baptized" placeholder="Baptized" value="{{ $user->baptized ?? old('baptized') }}">
-    <select name="gender">
+    <select name="gender" required>
+        <option selected></option>
         @foreach(array_column(\App\Enums\Gender::cases(), 'value') as $option)
-            <option @if($option == $user->gender ) selected @endif value="{{$option}}">{{$option}}</option>
+            <option @if(isset($user) && $option == $user->gender) selected @endif value="{{$option}}">{{$option}}</option>
         @endforeach
     </select>
     <select name="marital_status">
         @foreach(array_column(\App\Enums\MaritalStatus::cases(), 'value') as $option)
-            <option @if($option == $user->marital_status) selected @endif value="{{$option}}">{{$option}}</option>
+            <option @isset($user) @if($option == $user->marital_status) selected @endif @endisset value="{{$option}}">{{$option}}</option>
         @endforeach
     </select>
     <button type="submit">Send</button>

@@ -6,13 +6,7 @@
 
 <h1>Edit User {{ $user->name }}</h1>
 
-@if ($errors->any())
-    <ul class="errors">
-        @foreach ($errors->all() as $error)
-            <li class="class">{{$error}}</li>
-        @endforeach
-    </ul>
-@endif
+@include('users.includes.validations-form')
 
 <form action="{{ route('users.update', $user->id)}}" method="POST">
     @method('PUT')
