@@ -13,6 +13,7 @@ class UserController extends Controller
     public function __construct(User $user)
     {
         $this->model = $user;
+        #TESTANDO APENAS
     }
 
     public function index(Request $request)
