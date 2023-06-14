@@ -41,8 +41,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function states()
+    public function state()
     {
-        return $this->hasOne(State::class);
+        return $this->belongsTo(State::class);
     }
 }

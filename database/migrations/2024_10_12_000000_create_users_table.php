@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('complement')->nullable();
             $table->date('baptized')->nullable();
             $table->enum('marital_status', array_column(MaritalStatus::cases(), 'value'))->default('Single');
+            $table->foreignId('state_id')->constrained('states');
             $table->timestamps();
             $table->softDeletes();
         });
