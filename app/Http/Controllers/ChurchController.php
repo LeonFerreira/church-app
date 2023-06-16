@@ -8,6 +8,6 @@ class ChurchController extends Controller
 {
     public function index()
     {
-        return view('churchs');
+        return view('churches.index');
     }
 }

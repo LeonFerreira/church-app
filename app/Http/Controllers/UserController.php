@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUpdateUserFormRequest;
+use App\Models\State;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,6 @@ class UserController extends Controller
     public function __construct(User $user)
     {
         $this->model = $user;
-        #TESTANDO APENAS
     }
 
     public function index(Request $request)
@@ -25,7 +25,6 @@ class UserController extends Controller
 
     public function show($id)
     {
-        //$user = $this->model->where('id', $id)->first();
         if (!$user = $this->model->find($id))
             return redirect()->route('users.index');
 
@@ -34,7 +33,9 @@ class UserController extends Controller
 
     public function create()
     {
-        return view('users.create');
+        $states = State::select("id", "name")->get();
+
+        return view('users.create', compact('states'));
     }
 
     public function store(StoreUpdateUserFormRequest $request)
@@ -52,7 +53,9 @@ class UserController extends Controller
         if (!$user = $this->model->find($id))
             return redirect()->route('users.index');
 
-        return view('users.edit', compact('user'));
+        $states = State::select("id", "name")->get();
+
+        return view('users.edit', compact('user', 'states'));
     }
 
     public function update(Request $request, $id)

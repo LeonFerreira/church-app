@@ -1,11 +1,10 @@
 <?php
 
-use App\Enums\MaritalStatusEnum;
 use App\Http\Controllers\{ChurchController};
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/church', [ChurchController::class, 'index'])->name('churchs.index');
+Route::get('/churches', [ChurchController::class, 'index'])->name('churches.index');
 
 Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
 Route::put('users/{id}', [UserController::class, 'update'])->name('users.update');
