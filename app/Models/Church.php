@@ -16,6 +16,10 @@ class Church extends Model
         'id',
     ];
 
+    protected $casts = [
+        'headquarters' => 'boolean',
+    ];
+
     public function state()
     {
         return $this->belongsTo(State::class);

@@ -14,7 +14,7 @@ return new class extends Migration
             $table->string('address');
             $table->string('address_number');
             $table->string('complement')->nullable();
-            $table->boolean('headquarters');
+            $table->boolean('headquarters')->nullable();
             $table->foreignId('state_id')->constrained('states');
             $table->timestamps();
             $table->softDeletes();
