@@ -30,4 +30,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(State::class);
     }
+
+    function churches()
+    {
+        return $this->belongsToMany(Church::class, 'church_users');
+    }
 }

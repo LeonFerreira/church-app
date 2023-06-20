@@ -16,9 +16,11 @@ class ChurchController extends Controller
         $this->model = $church;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return view('churches.index');
+        $churches = $this->model->where('name', 'LIKE', "%{$request->search}%")->get();
+
+        return view('churches.index', compact('churches'));
     }
 
     public function show($id)
@@ -41,13 +43,11 @@ class ChurchController extends Controller
         $data = $request->all();
         $data['password'] = bcrypt($request->password);
 
-        if ($data['headquarters'] == null) {
-            $data['headquarters'] = false;
-        } else {
+        if ($request->has('headquarters')) {
             $data['headquarters'] = true;
+        } else {
+            $data['headquarters'] = false;
         }
-
-        // dd($data);
 
         $this->model->create($data);
 
@@ -71,6 +71,12 @@ class ChurchController extends Controller
 
         $data = $request->all();
         $data['password'] = bcrypt($request->password);
+
+        if ($request->has('headquarters')) {
+            $data['headquarters'] = true;
+        } else {
+            $data['headquarters'] = false;
+        }
 
         $church->update($data);
 

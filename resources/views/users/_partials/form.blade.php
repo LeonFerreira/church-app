@@ -35,4 +35,17 @@
             </option>
         @endforeach
     </select>
+    <select name="church_id">
+        <option selected disabled>Church</option>
+        @foreach($churches as $church)
+            <option
+                value="{{$church->id}}"
+                @if (isset($user) && $user->church_id == $church->id)
+                    selected
+                @endif
+            >
+                {{$church->name}}
+            </option>
+        @endforeach
+    </select>
     <button type="submit">Send</button>

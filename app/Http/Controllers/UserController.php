@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUpdateUserFormRequest;
+use App\Models\Church;
 use App\Models\State;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -34,8 +35,9 @@ class UserController extends Controller
     public function create()
     {
         $states = State::select("id", "name")->get();
+        $churches = Church::select("id", "name")->get();
 
-        return view('users.create', compact('states'));
+        return view('users.create', compact('states'), compact('churches'));
     }
 
     public function store(StoreUpdateUserFormRequest $request)
