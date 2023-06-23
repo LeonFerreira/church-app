@@ -17,7 +17,10 @@ class StoreUpdateUserFormRequest extends FormRequest
             [
                 'name' => 'required|string|max:255|min:3',
                 'email' => 'required|email|unique:users',
-                'password' => 'required|min:6'
+                'password' => 'required|min:6',
+                'state_id' => 'required',
+                'gender' => 'required',
+                'marital_status' => 'required'
             ];
     }
 }

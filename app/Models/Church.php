@@ -27,6 +27,6 @@ class Church extends Model
 
     function users()
     {
-        return $this->belongsToMany(Church::class, 'church_users');
+        return $this->belongsToMany(User::class, 'church_users');
     }
 }

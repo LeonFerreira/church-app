@@ -24,6 +24,7 @@ class User extends Authenticatable
 
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'birthday' => 'date'
     ];
 
     public function state()
@@ -33,6 +34,6 @@ class User extends Authenticatable
 
     function churches()
     {
-        return $this->belongsToMany(Church::class, 'church_users');
+        return $this->belongsToMany(Church::class, 'church_users')->withTimestamps();
     }
 }

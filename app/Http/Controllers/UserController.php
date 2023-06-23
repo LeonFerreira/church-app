@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUpdateUserFormRequest;
 use App\Models\Church;
+use App\Models\ChurchUser;
 use App\Models\State;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -42,10 +44,16 @@ class UserController extends Controller
 
     public function store(StoreUpdateUserFormRequest $request)
     {
-        $data = $request->all();
-        $data['password'] = bcrypt($request->password);
+        DB::transaction(function () use ($request) {
+            $data = $request->all();
+            $data['password'] = bcrypt($request->password);
 
-        $this->model->create($data);
+            $user = $this->model->create($data);
+
+            if ($request->church_id) {
+                $user->churches()->attach($request->church_id);
+            }
+        });
 
         return redirect()->route('users.index');
     }
@@ -56,8 +64,9 @@ class UserController extends Controller
             return redirect()->route('users.index');
 
         $states = State::select("id", "name")->get();
+        $churches = Church::select("id", "name")->get();
 
-        return view('users.edit', compact('user', 'states'));
+        return view('users.edit', compact('user', 'states', 'churches'));
     }
 
     public function update(Request $request, $id)
@@ -69,6 +78,14 @@ class UserController extends Controller
         $data['password'] = bcrypt($request->password);
 
         $user->update($data);
+
+        if ($request->church_id) {
+            // $user->churches()->detach($user->church_id);
+
+            // $user->churches()->attach($request->church_id);
+
+            $user->churches()->sync($request->church_id);
+        }
 
         return redirect()->route('users.index');
     }

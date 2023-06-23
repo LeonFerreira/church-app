@@ -1,12 +1,12 @@
 @csrf
-    <input type="text" name="name" placeholder="Nome" value="{{ $user->name ?? old('name')}}">
-    <input type="email" name="email" placeholder="E-mail" value="{{ $user->email ?? old('email')}}">
-    <input type="password" name="password" placeholder="Password">
-    <input type="tel" name="phone" placeholder="Phone" value="{{ $user->phone ?? old('phone')}}">
+    <input type="text" name="name" placeholder="Nome" value="{{ $user->name ?? old('name')}}" required>
+    <input type="email" name="email" placeholder="E-mail" value="{{ $user->email ?? old('email')}}" required>
+    <input type="password" name="password" placeholder="Password" required>
+    <input type="tel" name="phone" placeholder="Phone" value="{{ $user->phone ?? old('phone')}}" required>
     <label for="birthday">Birthday</label>
-    <input type="date" name="birthday" placeholder="Brithday" value="{{ $user->birthday ?? old('birthday')}}">
-    <input type="text" name="address" placeholder="Address" value="{{ $user->address ?? old('address')}}">
-    <input type="number" name="address_number" min="0" placeholder="Address Number" value="{{ $user->address_number ?? old('address_number') }}">
+    <input type="date" name="piruleta" placeholder="Birthday" value="{{$user->piruleta ?? old('piruleta') }}" required>
+    <input type="text" name="address" placeholder="Address" value="{{ $user->address ?? old('address')}}" required>
+    <input type="number" name="address_number" min="0" placeholder="Address Number" value="{{ $user->address_number ?? old('address_number') }}" required>
     <input type="text" name="complement" placeholder="Complement" value="{{ $user->complement ?? old('complement') }}">
     <label for="baptized">Baptized</label>
     <input type="date" name="baptized" placeholder="Baptized" value="{{ $user->baptized ?? old('baptized') }}">
@@ -35,7 +35,7 @@
             </option>
         @endforeach
     </select>
-    <select name="church_id">
+    <select class="select" name="church_id[]" multiple>
         <option selected disabled>Church</option>
         @foreach($churches as $church)
             <option
