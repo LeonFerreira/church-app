@@ -11,5 +11,4 @@
     @csrf
     @include('users._partials.form')
 </form>
-
 @endsection
