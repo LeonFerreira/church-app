@@ -2,11 +2,26 @@
     <div class="row mb-3">
         <div class="col">
             <label for="name" class="form-label">Name</label>
-            <input type="text" id="name" class="form-control" name="name" placeholder="Contoso" value="{{ $user->name ?? old('name')}}" required>
+            <input
+                type="text"
+                id="name"
+                class="form-control"
+                name="name"
+                placeholder="Contoso"
+                value="{{ $user->name ?? old('name')}}"
+                required
+            >
         </div>
         <div class="col">
             <label for="" class="form-label">E-mail</label>
-            <input type="email" class="form-control" name="email" placeholder="contoso@contoso.com" value="{{ $user->email ?? old('email')}}" required>
+            <input
+                type="email"
+                class="form-control"
+                name="email"
+                placeholder="contoso@contoso.com"
+                value="{{ $user->email ?? old('email')}}"
+                required
+            >
         </div>
         <div class="col">
             <label for="" class="form-label">Password</label>
